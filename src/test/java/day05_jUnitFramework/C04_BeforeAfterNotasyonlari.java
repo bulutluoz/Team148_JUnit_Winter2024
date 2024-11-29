@@ -1,5 +1,7 @@
 package day05_jUnitFramework;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -7,20 +9,11 @@ import utilities.ReusableMethods;
 
 import java.time.Duration;
 
-public class C03_SetupVeTeardownMethodlari {
-    /*
-        Java'da tekrar eden kodlari sevmeyiz
+public class C04_BeforeAfterNotasyonlari {
 
-        Bir test method'u olusturuldugunda
-        basta olusturmamiz gereken driver objesi
-        ve sondaki kapatma islemi
-        tum method'lar icin lazim
-
-        her test method'unda bunlari tekrar tekrar olusturmak yerine
-        method yapip methodCall ile kullanmayi tercih edebiliriz
-     */
     WebDriver driver;
 
+    @BeforeEach
     public void setup(){
         // Webdriver olusturup ayarlari yapin
         driver = new ChromeDriver();
@@ -28,6 +21,7 @@ public class C03_SetupVeTeardownMethodlari {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
 
+    @AfterEach
     public void teardown(){
         ReusableMethods.bekle(2);
         driver.quit();
@@ -35,7 +29,6 @@ public class C03_SetupVeTeardownMethodlari {
 
     @Test
     public void testOtomasyonuTest(){
-        setup();
         // testotomasyonu anasayfaya gidin
         driver.get("https://www.testotomasyonu.com");
 
@@ -46,12 +39,10 @@ public class C03_SetupVeTeardownMethodlari {
         if (actualUrl.contains(expectedUrlIcerik)){
             System.out.println("Testotomasyonu testi PASSED");
         }else System.out.println("Testotomasyonu testi FAILED");
-        teardown();
     }
 
     @Test
     public void youtubeOtomasyonuTest(){
-        setup();
         // youtube anasayfaya gidin
         driver.get("https://www.youtube.com");
 
@@ -62,12 +53,10 @@ public class C03_SetupVeTeardownMethodlari {
         if (actualUrl.contains(expectedUrlIcerik)){
             System.out.println("YouTube testi PASSED");
         }else System.out.println("YouTube testi FAILED");
-        teardown();
     }
 
     @Test
     public void wisequarterTest(){
-        setup();
         // wisequarter anasayfaya gidin
         driver.get("https://www.wisequarter.com");
 
@@ -78,6 +67,5 @@ public class C03_SetupVeTeardownMethodlari {
         if (actualUrl.contains(expectedUrlIcerik)){
             System.out.println("Wisequarter testi PASSED");
         }else System.out.println("Wisequarter testi FAILED");
-        teardown();
     }
 }
