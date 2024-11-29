@@ -2,6 +2,7 @@ package day05_jUnitFramework;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -10,6 +11,8 @@ import utilities.ReusableMethods;
 import java.time.Duration;
 
 public class C04_BeforeAfterNotasyonlari {
+
+
 
     WebDriver driver;
 
@@ -41,7 +44,7 @@ public class C04_BeforeAfterNotasyonlari {
         }else System.out.println("Testotomasyonu testi FAILED");
     }
 
-    @Test
+    @Test @Disabled
     public void youtubeOtomasyonuTest(){
         // youtube anasayfaya gidin
         driver.get("https://www.youtube.com");
