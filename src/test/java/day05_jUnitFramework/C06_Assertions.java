@@ -13,7 +13,7 @@ import utilities.ReusableMethods;
 import java.time.Duration;
 import java.util.List;
 
-public class C05_BeforeAll_AfterAll {
+public class C06_Assertions {
 
     // 3 farkli test method'u olusturarak asagidaki testleri gerceklestirin
     // 1- Test otomasyonu anasayfaya gidin
@@ -23,22 +23,24 @@ public class C05_BeforeAll_AfterAll {
     // 3- ilk urunu tiklayin
     //    ve acilan sayfadaki urun isminde case sensitive olmadan "phone" bulundugunu test edin
 
+
     /*
-        Bu gorev icin
-        her test method'undan sonra driver'i kapatmak (@AfterEach) mantikli olmaz
+        JUnit bir test method'unun
+        PASSED veya FAILED olmasina
+        kodlarin sorunsuz olarak calisip bitip bitmemesine gore karar verir
 
-        bunun yerine
-        class calismaya basladiginda hic bir method calismadan once driver'i olusturmak
-        ve tum @Test method'lari calisip bittikten sonra
-        calisacak @Test method'u kalmadiginda
-        driver'i kapatmak daha mantikli olur
+        Biz if-else ile test yaparsak
+        if else FAILED yazdirsa bile
+        kodlar problem olmadan calismaya devam ettigi icin
+        method'un sonunda JUnit test PASSED olarak algilar
+        ve yesil tik koyar
 
-        Bu tur birbirinin sonucuna bagli test method'lari oldugunda
-        JUnit ile method'lari tek tek run edebiliriz
-        ancak method'un yapmasi gereken islevi yapmasi mumkun olmayabilir
-
-        @BeforeAll ve @AfterAll notasyonu kullanan method'larin
-        mutlaka static olmasi gerekir
+        Ozellikle toplu test calistirmalarda
+        konsolu inceleyip
+        birsuru yazi arasinda
+        Test PASSED veya test FAILED sonucunu aramak
+        ve kac testin failed oldugunu hesaplamak
+        neredeyse imkansizdir
      */
     static WebDriver driver;
 
@@ -61,7 +63,7 @@ public class C05_BeforeAll_AfterAll {
         driver.get("https://www.testotomasyonu.com");
         //    Url'in testotomasyonu icerdigini test edin
         ReusableMethods.bekle(2);
-        String expectedUrlIcerik = "testotomasyonu";
+        String expectedUrlIcerik = "testotomasyonu1";
         String actualUrl = driver.getCurrentUrl();
 
         if (actualUrl.contains(expectedUrlIcerik)){
@@ -81,7 +83,7 @@ public class C05_BeforeAll_AfterAll {
 
         int actualBulunanUrunSayisi = bulunanUrunElementleriList.size();
 
-        if (actualBulunanUrunSayisi > 0){
+        if (actualBulunanUrunSayisi > 10){
             System.out.println("Urun bulma testi PASSED");
         } else System.out.println("Urun bulma testi FAILED");
 
@@ -98,7 +100,7 @@ public class C05_BeforeAll_AfterAll {
 
         WebElement ilkUrunIsimElementi = driver.findElement(By.xpath("//*[@class=' heading-sm mb-4']"));
 
-        String expectedIsimIcerik = "phone";
+        String expectedIsimIcerik = "phonexxxxxx";
         String actualUrunIsmi = ilkUrunIsimElementi.getText().toLowerCase();
 
         if (actualUrunIsmi.contains(expectedIsimIcerik)){
@@ -106,6 +108,4 @@ public class C05_BeforeAll_AfterAll {
         }else  System.out.println("Ilk urun isim testi FAILED");
 
     }
-
-
 }
