@@ -1,13 +1,17 @@
 package day05_jUnitFramework;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import utilities.ReusableMethods;
 
+import java.time.Duration;
 import java.util.List;
 
 public class C08_BeforeVeAfterSartMi {
@@ -23,9 +27,37 @@ public class C08_BeforeVeAfterSartMi {
 
     WebDriver driver;
 
+    /*
+        Verilen gorev tek bir test method'u ile yapilacak bir gorev olsa da
+
+        Webdriver'i olusturma ve kapatma islemini ayri bir setup() ve teardown() ile
+        yapmayi tercih ederiz
+
+        Eger tek bir test method'unun icinde
+        Webdriver olusturma ve sonunda driver'i kapatma islemlerini yaparsak
+        Test failed oldugunda exception olustugu icin
+        kodun calismasi durur ve son satirdaki driver.quit() calismaz
+
+        ozellikle toplu calistirmalarda
+        kapanmayan browser'larin olmasi
+        guzel olmaz
+
+     */
+
+    @BeforeEach
+    public void setup(){
+        driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+    }
+
+    @AfterEach
+    public void teardown(){
+        driver.quit();
+    }
+
     @Test
     public void urunTesti(){
-
         // 1- Test otomasyonu anasayfaya gidin
         driver.get("https://www.testotomasyonu.com");
         //    Url'in testotomasyonu icerdigini test edin
@@ -58,7 +90,6 @@ public class C08_BeforeVeAfterSartMi {
         String actualUrunIsmi = ilkUrunIsimElementi.getText().toLowerCase();
 
         Assertions.assertTrue(actualUrunIsmi.contains(expectedIsimIcerik),"Urun ismi phone icermiyor");
-
 
     }
 
