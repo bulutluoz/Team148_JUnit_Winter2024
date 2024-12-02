@@ -1,5 +1,6 @@
 package day06_assertions_dropdownMenu;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -8,6 +9,7 @@ import org.openqa.selenium.support.ui.Select;
 import utilities.ReusableMethods;
 import utilities.TestBaseEach;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class C06_DropdownMenu extends TestBaseEach {
@@ -56,9 +58,41 @@ public class C06_DropdownMenu extends TestBaseEach {
 
         // Ay dropdown menusunde "Ocak" degerinin bulundugunu test edin
 
+        //1.yontem : dropdown uzerinden olusturdugumuz selectAy.getText()
+        //           menudeki tum ay isimlerini getirir
+        String expectedAyIcerik = "Ocak";
+        String actualAyIcerik = ayDdm.getText();
+        System.out.println("actualAyIcerik : " + actualAyIcerik);
+        Assertions.assertTrue(actualAyIcerik.contains(expectedAyIcerik));
+
+        // 2.yontem : tum opsiyonlarin yazilarini olusturdugumuz
+        //            String bir listeye ekleyebiliriz
+        //            sonra list.contains() ile testimizi yapabiliriz
+        List<String> tumListeStr = new ArrayList<>();
+
+        for (WebElement eachBaslik:ayDdmOptionElementleriList){
+
+            tumListeStr.add(eachBaslik.getText());
+        }
+
+        String expectedBaslikIsmi = "Ocak";
+
+        Assertions.assertTrue(tumListeStr.contains(expectedBaslikIsmi));
+
+        // 3.yontem ReusableMethods class'indaki method'u kullanalim
+
+        List<String> ayDropdownMenuMetinleri = ReusableMethods.stringListeyeDonustur(ayDdmOptionElementleriList);
+        Assertions.assertTrue(ayDropdownMenuMetinleri.contains("Ocak"));
 
 
         //6. Ay Dropdown menusunun boyutunun 13 olduğunu test edin
+
+        int expectedDropdownBoyutu = 13;
+        int actualDropdownBoyutu = ayDdmOptionElementleriList.size();
+
+        Assertions.assertEquals(expectedDropdownBoyutu,actualDropdownBoyutu);
+
+
 
         ReusableMethods.bekle(2);
     }
