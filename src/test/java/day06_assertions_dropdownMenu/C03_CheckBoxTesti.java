@@ -51,7 +51,9 @@ public class C03_CheckBoxTesti {
 
         Actions actions = new Actions(driver);
         actions.sendKeys(Keys.PAGE_DOWN).perform();
+
         ReusableMethods.bekle(1);
+
         //	d. Seker ve Epilepsi checkbox’larininin seçili
         //     olmadigini test edin
         WebElement sekerCheckBox = driver.findElement(By.id("hastalikCheck2"));
