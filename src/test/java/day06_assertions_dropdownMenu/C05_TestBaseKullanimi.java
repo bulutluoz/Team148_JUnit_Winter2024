@@ -25,8 +25,10 @@ public class C05_TestBaseKullanimi extends TestBaseEach {
 
     @Test
     public void test01(){
+
         driver.get("https://www.testotomasyonu.com");
         ReusableMethods.bekle(1);
+
     }
 
 
