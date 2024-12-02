@@ -51,8 +51,11 @@ public class C08_DropdownMenu extends TestBaseEach {
         // 9. “amount” kutusuna bir sayi girin
 
         // 10. “US Dollars” in secilmedigini test edin
+
         // 11. “Selected currency” butonunu secin
+
         // 12. “Calculate Costs” butonuna basin sonra “purchase” butonuna basin
+
         // 13. “Foreign currency cash was successfully purchased.” yazisinin ciktigini kontrol edin.
 
         ReusableMethods.bekle(5);
