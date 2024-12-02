@@ -70,6 +70,9 @@ public class C02_Assertions {
     public void francaisTest(){
         //	○ FrancaisLinkTest => Fransizca Linkin görüntülendiğini test edin
 
+        WebElement francaisLinki = driver.findElement(By.xpath("//button[@lang='fr']"));
+
+        Assertions.assertTrue(francaisLinki.isDisplayed());
     }
 
 
