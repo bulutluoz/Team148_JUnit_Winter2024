@@ -84,10 +84,27 @@ public class C02_JsAlerts extends TestBaseEach {
     public void jsPromptTest(){
         //3.Test
         //	- https://testotomasyonu.com/javascriptAlert adresine gidin
+        driver.get("https://testotomasyonu.com/javascriptAlert");
+
         //	- 3.alert'e tiklayalim
-        //	- Cikan prompt ekranina "Abdullah" yazdiralim
+        driver.findElement(By.xpath("//*[text()='Click for JS Prompt']"))
+                .click();
+
+        //	- Cikan prompt ekranina "Cansu" yazdiralim
+        driver.switchTo().alert().sendKeys("Cansu");
+
         //	- OK tusuna basarak alert'i kapatalim
+        driver.switchTo().alert().accept();
+
         //	- Cikan sonuc yazisinin Cansu icerdigini test edelim
+
+        String expectedSonucYaziIcerigi = "Cansu";
+
+        WebElement sonucYazisiElementi = driver.findElement(By.id("result"));
+        String actualSonucYazisi = sonucYazisiElementi.getText();
+
+        Assertions.assertTrue(actualSonucYazisi.contains(expectedSonucYaziIcerigi));
+
     }
 
 
