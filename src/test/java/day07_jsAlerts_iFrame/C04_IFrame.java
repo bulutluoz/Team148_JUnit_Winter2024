@@ -59,7 +59,22 @@ public class C04_IFrame extends TestBaseEach {
 
         Assertions.assertTrue(saleUpYaziElementi.isDisplayed());
 
+        // 5- Fashion bolumundeki ilk urunu tiklayin
+        //    fashion bolumu ayri bir IFrame icerisinde oldugundan , once o iFrame'e gecis yapmaliyiz
+        WebElement fashionIframe = driver.findElement(By.xpath("(//iframe)[2]"));
 
+        driver.switchTo().frame(fashionIframe);
+
+        // artik ilk urun isminde "Men Slim Fit" gectigini test edin
+        WebElement fashionIlkElement = driver.findElement(By.xpath("(//*[@class='overlay'])[1]"));
+        // bu xpath 3 element bulabiliyor
+        // ANNCAAAKKK biz fashion iframe icinde oldugumuzdan
+        // o iframe icinde olan tek bir elementi bize getirir
+
+        String expectedIsimIcerik = "Men Slim Fit";
+        String actualIsim = fashionIlkElement.getText();
+
+        Assertions.assertTrue(actualIsim.contains(expectedIsimIcerik));
 
         ReusableMethods.bekle(3);
     }
