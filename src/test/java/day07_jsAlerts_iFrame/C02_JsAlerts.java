@@ -3,6 +3,7 @@ package day07_jsAlerts_iFrame;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import utilities.ReusableMethods;
 import utilities.TestBaseEach;
 
@@ -58,8 +59,25 @@ public class C02_JsAlerts extends TestBaseEach {
     public void jsConfirmTest(){
         //2.Test
         //	- https://testotomasyonu.com/javascriptAlert adresine gidin
+        driver.get("https://testotomasyonu.com/javascriptAlert");
+
         //	- 2.alert'e tiklayalim
-        //	- Cancel'a basip, cikan sonuc yazisinin "You clicked: Cancel" oldugunu test edin
+        driver.findElement(By.xpath("//*[text()='Click for JS Confirm']"))
+                .click();
+
+        //	- Cancel'a basip,
+        driver.switchTo()
+                .alert()
+                .dismiss();
+
+        //	cikan sonuc yazisinin "You clicked: Cancel" oldugunu test edin
+        String expectedSonucYazisi = "You clicked: Cancel";
+
+        WebElement sonucYazisiElementi = driver.findElement(By.id("result"));
+        String actualSonucYazisi = sonucYazisiElementi.getText();
+
+        Assertions.assertEquals(expectedSonucYazisi,actualSonucYazisi);
+
     }
 
     @Test
