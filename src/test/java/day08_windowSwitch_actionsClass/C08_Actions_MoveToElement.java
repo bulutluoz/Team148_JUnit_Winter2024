@@ -20,7 +20,7 @@ public class C08_Actions_MoveToElement extends TestBaseEach {
         WebElement kidsWearButton = driver.findElement(By.xpath("(//li[@class='has-sub'])[7]"));
 
         actions.moveToElement(kidsWearButton).perform();
-
+        ReusableMethods.bekle(2);
         //3- “Boys” linkine basin
         driver.findElement(By.xpath("//*[.='Boys']"))
                 .click();
