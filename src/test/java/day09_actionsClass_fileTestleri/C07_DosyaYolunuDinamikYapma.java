@@ -61,11 +61,7 @@ public class C07_DosyaYolunuDinamikYapma {
         System.out.println(      Files.exists(Paths.get(denemeDosyaYolu))     ); // true
 
         /*
-
              /Users/ahmetbulutluoz/Desktop/My Desktop/course/projeler/Team148_JUnit/src/test/java/day09_actionsClass_fileTestleri/deneme.txt
-
-
-
          */
 
         System.out.println( System.getProperty( "user.dir"  ) );
