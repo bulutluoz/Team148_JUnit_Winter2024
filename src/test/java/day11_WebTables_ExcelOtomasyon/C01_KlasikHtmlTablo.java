@@ -72,17 +72,36 @@ public class C01_KlasikHtmlTablo extends TestBaseEach {
 
         //9. Satir ve sutunu parametre olarak alip, hucredeki bilgiyi döndüren bir method olusturun
 
+        System.out.println(getHucreData(1, 3)); // $399.00
+
+        System.out.println(getHucreData(3, 2)); // Travel
+
 
         //10. 4.satirdaki category degerinin "Furniture" oldugunu test edin
+        //    4.satir , 2.sutundaki datanin "Furniture" oldugunu test edin
+
+        String expectedData = "Furniture";
+        String actualData = getHucreData(4,2);
+
+        Assertions.assertEquals(expectedData,actualData);
+
+
         ReusableMethods.bekle(2);
     }
 
+
+
+
+
+
     public String getHucreData(int satirNo , int sutunNo){
 
-        //       //tbody/tr[3]/td[1]
+        //       //tbody/tr[    3    ]/td[   1    ]
 
-       String dinamikXpath = "";
+       String dinamikXpath = "//tbody/tr[" + satirNo +"]/td["+ sutunNo + "]";
 
+       WebElement hedefHucreElementi = driver.findElement(By.xpath(dinamikXpath));
 
+        return hedefHucreElementi.getText();
     }
 }
