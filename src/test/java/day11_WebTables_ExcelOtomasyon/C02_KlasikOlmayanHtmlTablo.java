@@ -54,10 +54,18 @@ public class C02_KlasikOlmayanHtmlTablo extends TestBaseEach {
         System.out.println(getHucreData(2,2)); // Electronics
 
         System.out.println(getHucreData(3,4)); // Go
-
-
+        
         //  9. Tabloda " Category" si Furniture olan urunun fiyatini yazdirin
 
+        for (int i = 1; i <= satirElementleriList.size() ; i++) {
+
+            String satirdakiCategoryDegeri = getHucreData(i,2);
+            String satirdakiUrunFiyati = getHucreData(i,3);
+
+            if (satirdakiCategoryDegeri.equalsIgnoreCase("Furniture")){
+                System.out.println(satirdakiUrunFiyati);
+            }
+        }
 
 
 
