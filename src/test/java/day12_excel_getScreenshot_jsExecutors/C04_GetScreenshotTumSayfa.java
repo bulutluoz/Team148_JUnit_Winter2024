@@ -1,20 +1,19 @@
 package day12_excel_getScreenshot_jsExecutors;
 
+import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import utilities.ReusableMethods;
 import utilities.TestBaseEach;
 
 import java.io.File;
+import java.io.IOException;
 
 public class C04_GetScreenshotTumSayfa extends TestBaseEach {
 
     @Test
-    public void test01(){
+    public void test01() throws IOException {
 
         // testotomasyonu anasayfaya gidin
         driver.get("https://www.testotomasyonu.com");
@@ -32,6 +31,7 @@ public class C04_GetScreenshotTumSayfa extends TestBaseEach {
 
         Assertions.assertNotEquals(unExpectedAramaSonucu,actualAramaSonucu);
 
+        ReusableMethods.bekle(1);
         // tum sayfanin screenshot'ini alin
 
         // 1.adim tss objesi olusturalim
@@ -41,8 +41,11 @@ public class C04_GetScreenshotTumSayfa extends TestBaseEach {
         File asilResim = new File("target/screenshots/tumSayfaScreenshot.jpeg");
 
 
+        // 3.adim screenshot'i alip gecici bir dosya olarak kaydedelim
+        File geciciDosya = tss.getScreenshotAs(OutputType.FILE);
 
-
+        // 4.adim gecici dosyayi asil dosyaya kopyalayalim
+        FileUtils.copyFile(geciciDosya,asilResim);
 
 
         ReusableMethods.bekle(2);
