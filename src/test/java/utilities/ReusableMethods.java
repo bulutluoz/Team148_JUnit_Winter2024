@@ -88,14 +88,14 @@ public class ReusableMethods {
 
         // once tarih etiketi olusturalim
         LocalDateTime ldt = LocalDateTime.now();
-        DateTimeFormatter format1 = DateTimeFormatter.ofPattern("yyMMddHHmmss");
+        DateTimeFormatter format1 = DateTimeFormatter.ofPattern("yyMMdd_HHmmss");
         String tarihEtiketi = ldt.format(format1);
 
         // 1.adim tss objesi olusturalim
         TakesScreenshot tss = (TakesScreenshot) driver;
 
         // 2.adim resmi kaydedecegimiz File'i olusturalim
-        File asilResim = new File("target/screenshots/TumSayfaSS"+ tarihEtiketi +".jpeg");
+        File asilResim = new File("target/screenshots/TumSayfaSS_"+ tarihEtiketi +".jpeg");
 
 
         // 3.adim screenshot'i alip gecici bir dosya olarak kaydedelim
@@ -114,14 +114,14 @@ public class ReusableMethods {
 
         // once tarih etiketi olusturalim
         LocalDateTime ldt = LocalDateTime.now();
-        DateTimeFormatter format1 = DateTimeFormatter.ofPattern("yyMMddHHmmss");
+        DateTimeFormatter format1 = DateTimeFormatter.ofPattern("yyMMdd_HHmmss");
         String tarihEtiketi = ldt.format(format1);
 
         // 1.adim tss objesi olusturalim
         TakesScreenshot tss = (TakesScreenshot) driver;
 
         // 2.adim resmi kaydedecegimiz File'i olusturalim
-        File asilResim = new File("target/screenshots/" + isim + tarihEtiketi +".jpeg");
+        File asilResim = new File("target/screenshots/" + isim +"_"+ tarihEtiketi +".jpeg");
 
 
         // 3.adim screenshot'i alip gecici bir dosya olarak kaydedelim
@@ -135,5 +135,77 @@ public class ReusableMethods {
         }
 
     }
+
+    public static void webElementScreenshotIsimli(WebElement targetElement, String raporismi){
+        // 1.adim screenshot alacagimiz webelementi locate edip kaydedelim
+        //        biz yukarda Logout butonunu locate ettik
+
+        // 2.adim resmi kaydedecegimiz File'i olusturalim
+        File asilResim = new File("target/screenshots/"+ raporismi +".jpeg");
+
+
+        // 3.adim webElement'i kullanarak screenshot'i alip gecici bir dosya olarak kaydedelim
+        File geciciDosya = targetElement.getScreenshotAs(OutputType.FILE);
+
+        // 4.adim gecici dosyayi asil dosyaya kopyalayalim
+        try {
+            FileUtils.copyFile(geciciDosya,asilResim);
+        } catch (IOException e) {
+            System.out.println("Fotograf cekilemedi");
+        }
+    }
+
+    public static void webElementScreenshotTarihli(WebElement targetElement){
+
+        // once tarih etiketi olusturalim
+        LocalDateTime ldt = LocalDateTime.now();
+        DateTimeFormatter format1 = DateTimeFormatter.ofPattern("yyMMdd_HHmmss");
+        String tarihEtiketi = ldt.format(format1);
+
+
+        // 1.adim screenshot alacagimiz webelementi locate edip kaydedelim
+        //        biz yukarda Logout butonunu locate ettik
+
+        // 2.adim resmi kaydedecegimiz File'i olusturalim
+        File asilResim = new File("target/screenshots/Webelement"+ tarihEtiketi +".jpeg");
+
+
+        // 3.adim webElement'i kullanarak screenshot'i alip gecici bir dosya olarak kaydedelim
+        File geciciDosya = targetElement.getScreenshotAs(OutputType.FILE);
+
+        // 4.adim gecici dosyayi asil dosyaya kopyalayalim
+        try {
+            FileUtils.copyFile(geciciDosya,asilResim);
+        } catch (IOException e) {
+            System.out.println("Fotograf cekilemedi");
+        }
+    }
+
+    public static void webElementScreenshotTarihVeIsimli(WebElement targetElement,String raporIsmi){
+
+        // once tarih etiketi olusturalim
+        LocalDateTime ldt = LocalDateTime.now();
+        DateTimeFormatter format1 = DateTimeFormatter.ofPattern("yyMMdd_HHmmss");
+        String tarihEtiketi = ldt.format(format1);
+
+
+        // 1.adim screenshot alacagimiz webelementi locate edip kaydedelim
+        //        biz yukarda Logout butonunu locate ettik
+
+        // 2.adim resmi kaydedecegimiz File'i olusturalim
+        File asilResim = new File("target/screenshots/"+raporIsmi +"_"+ tarihEtiketi +".jpeg");
+
+
+        // 3.adim webElement'i kullanarak screenshot'i alip gecici bir dosya olarak kaydedelim
+        File geciciDosya = targetElement.getScreenshotAs(OutputType.FILE);
+
+        // 4.adim gecici dosyayi asil dosyaya kopyalayalim
+        try {
+            FileUtils.copyFile(geciciDosya,asilResim);
+        } catch (IOException e) {
+            System.out.println("Fotograf cekilemedi");
+        }
+    }
+
 
 }
